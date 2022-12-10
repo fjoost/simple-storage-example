@@ -6,21 +6,7 @@ contract SimpleStorage {
 
     /**** almacenar un uint256 -> almacenar un array de personas, que tengan 2 atributos ****/
     
-    //crear type, con struct
-    struct People {
-        uint256 favoriteNumber;
-        string name;
-    }
-
-    //crear un array del type Persona
-    People[] public people;
-    
-    //añadir personas al array
-    function addPeople(string memory _name, uint256 _favoriteNumber) public{
-        //people.push(People({favoriteNumber: _favoriteNumber, name: _name }));
-        people.push(People(_favoriteNumber, _name));
-    }
-
+    //storage variable, with slot zero
     uint256 public favoriteNumber;
 
     function store(uint256 _favoriteNumber) public{
@@ -30,6 +16,23 @@ contract SimpleStorage {
     function retrieve() public view returns (uint256){
         return favoriteNumber;
 
+    }
+    //crear type, con struct
+    struct People {
+        uint256 favoriteNumber;
+        string name;
+    }
+
+    //crear un array del type Persona
+    People[] public people;
+    
+    //calldata(temp during the tx, cant be modified)
+    //memory(temp, can be modified)
+    //storage(permanent, can modified)
+    //it doesnt necesary put memory keyword to uint256 variables
+    function addPeople(string memory _name, uint256 _favoriteNumber) public{
+        //people.push(People({favoriteNumber: _favoriteNumber, name: _name }));
+        people.push(People(_favoriteNumber, _name));
     }
 
 }
