@@ -17,6 +17,10 @@ contract SimpleStorage {
         return favoriteNumber;
 
     }
+
+    //creamos un diccionario, asignacion nombre -> numero
+    mapping(string => uint256) public nameToNumber;
+
     //crear type, con struct
     struct People {
         uint256 favoriteNumber;
@@ -33,6 +37,9 @@ contract SimpleStorage {
     function addPeople(string memory _name, uint256 _favoriteNumber) public{
         //people.push(People({favoriteNumber: _favoriteNumber, name: _name }));
         people.push(People(_favoriteNumber, _name));
+
+        //diccionario[string] -> enlazamos -> numero
+        nameToNumber[_name] = _favoriteNumber;
     }
 
 }
