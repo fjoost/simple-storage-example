@@ -13,5 +13,15 @@ contract SimpleStorage {
 
     function store(uint256 _favoriteNumber) public{
         favoriteNumber = _favoriteNumber;
+        //if we call a retrieve(), it will spend gas
+        //because, we adding +1 instruction to execute in parent function
+        //retrieve();
+    }
+
+    //view & pure functions when called alone, don't spend gas
+    //because, it doesnt change blockchain status, only read status
+    function retrieve() public view returns (uint256){
+        return favoriteNumber;
+
     }
 }
